@@ -1,0 +1,254 @@
+@import "../css/normalize";
+@import "common/common.scss";
+@import "../iconfont/iconfont.css";
+@import "../plugins/swiper/dist/css/swiper";
+
+[v-cloak] {
+  display: none;
+}
+
+body {
+  background: #ffffff;
+}
+
+.doc_wrap {
+
+  .doc_nav {
+    width: 100%;
+    min-width: 1200px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 60px;
+    background: rgba(0, 0, 0, .55);
+
+    ul {
+      display: flex;
+      justify-content: flex-start;
+      align-content: center;
+
+      .nav_tab {
+        line-height: 60px;
+        height: 60px;
+        margin-left: 15px;
+
+        &:last-child {
+          margin-right: 15px;
+        }
+
+        &.logo {
+          a {
+            height: 100%;
+            width: 200px;
+            display: inline-block;
+            img {
+              vertical-align: middle;
+              width: 100%;
+            }
+          }
+        }
+
+        &.tab_space {
+          flex: 1;
+        }
+
+        .language_select {
+          font-size: 14px;
+          z-index: 8;
+          cursor: pointer;
+          margin: 0;
+          position: relative;
+
+          &:hover {
+            dt {
+              &:after {
+                transform: rotate(180-45deg);
+              }
+            }
+            dd {
+              display: block;
+            }
+          }
+
+          dt {
+            $dt-color: #c2c2c2;
+            $dt-height: 30px;
+            height: $dt-height;
+            line-height: $dt-height;
+            display: inline-block;
+            border: $dt-color solid .9px;
+            border-radius: $dt-height;
+            padding: 0 12px;
+            color: $dt-color;
+
+            &:hover {
+              color: #55a6a5;
+              border-color: #55a6a5;
+
+              &:after {
+                color: #55a6a5;
+              }
+            }
+
+            // 旋转有用两条领边边框的正方形来模拟向下的箭头
+            &:after {
+              margin-top: -5px;
+              margin-left: 8px;
+              content: "";
+              color: $dt-color;
+              display: inline-block;
+              width: 6px;
+              height: 6px;
+              vertical-align: middle;
+              transform: rotate(-45deg);
+              border-bottom: 1px solid currentColor;
+              border-left: 1px solid currentColor;
+              transition: linear .1s;
+            }
+          }
+
+          dd {
+            display: none;
+            position: absolute;
+            top: 60px;
+            width: 240px;
+            right: 0;
+            background: #0c5460;
+
+            a {
+              width: 50%;
+              line-height: 60px;
+              height: 60px;
+              text-align: center;
+              float: left;
+              color: #ffffff
+            }
+          }
+        }
+      }
+    }
+
+  }
+
+  .doc_body {
+    .banner {
+      height: 300px;
+      margin-top: 60px;
+    }
+    .main_app {
+      //background: #c3c3c3;
+      width: 1200px;
+      margin: 0 auto;
+      height: 500px;
+      overflow: auto;
+
+      @mixin table_row {
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+
+        span {
+          display: table-cell;
+          padding-left: 15px;
+          opacity: .7;
+          &.price {
+            color: red;
+            &.rise {
+              color: green;
+            }
+          }
+
+          &:first-child {
+            width: 60px;
+            text-align: center;
+          }
+          &:nth-last-child(2) {
+            text-align: right;
+          }
+          &:last-child {
+            width: 100px;
+            text-align: center;
+
+            a {
+              &:hover {
+                color: #0ab1fc;
+                cursor: pointer;
+              }
+            }
+          }
+        }
+      }
+
+      .trade_zone {
+        position: relative;
+        .zone_nav {
+          position: relative;
+          overflow: hidden;
+          z-index: 1;
+          border-left: 1px solid #3c763d;
+          border-radius: 3px 0 0 0;
+          span {
+            width: 120px;
+            height: 45px;
+            line-height: 45px;
+            text-align: center;
+            border: 1px solid #3c763d;
+            border-left: none;
+            float: left;
+            position: relative;
+            background-color: #ffffff;
+
+            &:last-child {
+              border-radius: 0 3px 0 0;
+            }
+
+            &.current {
+              border-bottom-color: transparent;
+            }
+
+            em {
+              position: relative;
+              z-index: 1;
+              display: block;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+
+      .coin_table {
+        border: 1px solid #3c763d;
+        border-radius: 0 3px 3px 3px;
+        margin-top: -1px; // 把上边框藏起来
+        .coin_header {
+          position: relative;
+          padding: 16px 0 6px;
+          @include table_row;
+
+          span.sort {
+            color: inherit;
+            &.desc {
+              color: green;
+            }
+            &.asc {
+              color: red
+            }
+          }
+        }
+
+        .coin_list {
+          //overflow: auto;
+          max-height: 600px;
+          dl {
+            height: 60px;
+            line-height: 60px;
+
+            .coin_row {
+              @include table_row;
+            }
+          }
+        }
+      }
+    }
+  }
+}

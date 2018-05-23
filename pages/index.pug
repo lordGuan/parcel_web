@@ -1,0 +1,92 @@
+doctype html
+html
+    head
+        meta(http-equiv="Content-Type" content="text/html;charset=UTF-8")
+        link(href="../assets/sass/style.scss" rel="stylesheet" type="text/css")
+    body
+        //-整个版面的Wrap
+        div.doc_wrap
+            //-顶部的导航
+            nav.doc_nav
+                ul.main_nav
+                    li.nav_tab.logo
+                        a(href="/")
+                            img(src="../assets/images/main.png")
+                    -
+                        var menus = [{title: "OTC场外交易",href: "http://otc.upex.com",isNeededLogin: false},
+                        {title: "币币交易",href: "http://otc.upex.com",isNeededLogin: false},
+                        {title: "K线交易",href: "http://otc.upex.com",isNeededLogin: true}]
+                    each li in menus
+                        li.nav_tab
+                            a(href=li.href)= li.title
+                    li.nav_tab.tab_space
+                    li.nav_tab.login
+                        a(href="/login") 登录
+                    li.nav_tab.register
+                        a(href="/register") 注册
+                    li.nav_tab.config
+                        a(href="/personal")
+                            i.iconfont.icon-set
+                    li.nav_tab.language
+                        dl.language_select
+                            dt 选择语言
+                            dd
+                                a(href="javascript:void(0)" data-lang="en") English
+                                a(href="javascript:void(0)" data-lang="zh_CN") 简体中文
+                                a(href="javascript:void(0)" data-lang="zh_TW") 繁体中文
+            //-紧挨导航栏的首屏内容
+            div.doc_body
+                div.banner
+                //-在这里尝试一下列表的渲染和数据绑定
+                div.main_app
+                    div.trade_zone
+                        div.zone_nav
+                            span.uppercase(:class="{'current': zone === ''}")
+                                em(@click="zone = ''") 全部
+                            span.uppercase(:class="{'current': zone === 'btc'}")
+                                em(@click="zone = 'btc'") btc
+                            span.uppercase(:class="{'current': zone === 'eth'}")
+                                em(@click="zone = 'eth'") eth
+                            span.uppercase(:class="{'current': zone === 'usdt'}")
+                                em(@click="zone = 'usdt'") usdt
+                            span.uppercase(:class="{'current': zone === 'selected'}")
+                                em(@click="zone = 'selected'") 自选
+                    div.coin_table
+                        div.coin_header
+                            span
+                            span.clickable.sort(
+                            @click="toggleSort('sortByName')"
+                            :class="[currentSort === 'sortByName' ? (sortByName ? 'asc' : 'desc') : '']"
+                            ) 交易对
+                            span.clickable.sort(
+                            @click="toggleSort('sortByPrice')"
+                            :class="[currentSort === 'sortByPrice' ? (sortByPrice ? 'desc' : 'asc') : '']"
+                            ) 最新价
+                            span.clickable.sort(
+                            @click="toggleSort('sortByRate')"
+                            :class="[currentSort === 'sortByRate' ? (sortByRate ? 'desc' : 'asc') : '']"
+                            ) 涨跌幅
+                            span 24H最高价
+                            span 24H最低价
+                            span 24H交易量
+                            span
+                        div.coin_list
+                            dl(v-for="(data,index) in filterFakeData" v-cloak :key="index")
+                                dt
+                                dd
+                                    div.coin_row
+                                        span
+                                            i.iconfont.clickable(@click="select(data.trade_pair,data)" :class="[data.isSelected ? 'icon-smile':'icon-favorite']")
+                                        span(
+                                        v-for="(value,key) in data"
+                                        :class="{'rise':key==='rate' && Number(value)>=0,'price':key==='rate'}"
+                                        v-if="key !== 'isSelected'"
+                                        )
+                                            | {{value?value:"---"}}
+                                            |
+                                            i.iconfont(v-if="value && key === 'rate'" :class="[value>=0?'icon-good':'icon-bad' ]")
+                                        span
+                                            a.op 交易
+            //-底部的关于内容
+            footer.doc_footer
+        script(src="../src/index.js")

@@ -1,0 +1,11 @@
+{
+  "presets": [
+    "stage-2",
+    "env",
+    "flow"
+  ],
+  "plugins": [
+    "transform-class-properties",
+    "babel-plugin-transform-runtime"
+  ]
+}

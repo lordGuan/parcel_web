@@ -1,0 +1,43 @@
+dd, dl, dt, li, ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a, a:focus, a:active {
+  color: #000000;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #55a6a5
+}
+
+body {
+  min-width: 1200px;
+  font: 14px/1.4 PingFang SC, Hiragino Sans GB, Heiti SC, Microsoft YaHei, WenQuanYi Micro Hei, serif
+}
+
+.uppercase, .upper {
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+html ::-webkit-scrollbar-thumb {
+  width: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.05);
+  background-color: rgba(97,104,138,.15)
+}
+
+// mac下滚动条颜色的修正
+html ::-webkit-scrollbar {
+  width: 10px;
+  background-color: transparent
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+// TODO 不同的语言页面使用的font或者font-family待补全
